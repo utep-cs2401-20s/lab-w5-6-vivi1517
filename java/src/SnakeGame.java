@@ -51,7 +51,7 @@ public class SnakeGame {
     }
 
     private int neighbors(boolean[][] array, int row, int col) {    //checks possible cells around the point//
-        int snake = 0;                                              //anc sees if the cell is part of the snake//
+        int snake = 0;                                              //and sees if the cell is part of the snake//
         if (row == 0 && col == 0) {
             if (array[row][col + 1] == true) {
                 snake += 1;
@@ -145,16 +145,174 @@ public class SnakeGame {
         return snake;
     }
 
-    public int[] findTailRecursive(){
-        resetCounters();
-        return findTailRecursive(headPosition, headPosition);
+    public int[] neighborsRecursive(boolean[][] array, int[] previousPosition, int row, int col){
+        int[] location = new int[2];
+        if (row == 0 && col == 0){
+            if (array[row][col + 1] == true && (previousPosition[0] != row || previousPosition[1] != col + 1)){
+                location[0] = row;
+                location[1] = col + 1;
+                return location;
+            }
+            if (array[row + 1][col] == true && (previousPosition[0] != row + 1|| previousPosition[1] != col)){
+                location[0] = row + 1;
+                location[1] = col;
+                return location;
+            }
+        }
+        else if (row == 0 && col == array.length - 1){
+            if (array[row][col - 1] == true && (previousPosition[0] != row || previousPosition[1] != col - 1)){
+                location[0] = row;
+                location[1] = col - 1;
+                return location;
+            }
+            if (array[row + 1][col] == true && (previousPosition[0] != row + 1|| previousPosition[1] != col)){
+                location[0] = row + 1;
+                location[1] = col;
+                return location;
+            }
+        }
+        else if (row == 0){
+            if (array[row][col - 1] == true && (previousPosition[0] != row || previousPosition[1] != col - 1)) {
+                location[0] = row;
+                location[1] = col - 1;
+                return location;
+            }
+            if (array[row + 1][col] == true && (previousPosition[0] != row + 1|| previousPosition[1] != col)){
+                location[0] = row + 1;
+                location[1] = col;
+                return location;
+            }
+            if (array[row][col + 1] == true && (previousPosition[0] != row || previousPosition[1] != col + 1)){
+                location[0] = row;
+                location[1] = col + 1;
+                return location;
+            }
+        }
+        else if (row == array.length - 1 && col == 0){
+            if (array[row - 1][col] == true && (previousPosition[0] != row - 1|| previousPosition[1] != col)){
+                location[0] = row - 1;
+                location[1] = col;
+                return location;
+            }
+            if (array[row][col + 1] == true && (previousPosition[0] != row || previousPosition[1] != col + 1)){
+                location[0] = row;
+                location[1] = col + 1;
+                return location;
+            }
+        }
+        else if (row == array.length - 1 && col == array.length - 1){
+            if (array[row - 1][col] == true && (previousPosition[0] != row - 1|| previousPosition[1] != col)){
+                location[0] = row - 1;
+                location[1] = col;
+                return location;
+            }
+            if (array[row][col - 1] == true && (previousPosition[0] != row || previousPosition[1] != col - 1)){
+                location[0] = row;
+                location[1] = col - 1;
+                return location;
+            }
+        }
+        else if (row == array.length - 1){
+            if (array[row][col - 1] == true && (previousPosition[0] != row || previousPosition[1] != col - 1)){
+                location[0] = row;
+                location[1] = col - 1;
+                return location;
+            }
+            if (array[row - 1][col] == true && (previousPosition[0] != row - 1|| previousPosition[1] != col)){
+                location[0] = row - 1;
+                location[1] = col;
+                return location;
+            }
+            if (array[row][col + 1] == true && (previousPosition[0] != row || previousPosition[1] != col + 1)){
+                location[0] = row;
+                location[1] = col + 1;
+                return location;
+            }
+        }
+        else if (col == 0){
+            if (array[row - 1][col] == true && (previousPosition[0] != row - 1|| previousPosition[1] != col)){
+                location[0] = row - 1;
+                location[1] = col;
+                return location;
+            }
+            if (array[row][col + 1] == true && (previousPosition[0] != row || previousPosition[1] != col + 1)){
+                location[0] = row;
+                location[1] = col + 1;
+                return location;
+            }
+            if (array[row + 1][col] == true && (previousPosition[0] != row + 1|| previousPosition[1] != col)){
+                location[0] = row + 1;
+                location[1] = col;
+                return location;
+            }
+        }
+        else if (col == array.length - 1){
+            if (array[row - 1][col] == true && (previousPosition[0] != row - 1|| previousPosition[1] != col)){
+                location[0] = row - 1;
+                location[1] = col;
+                return location;
+             }
+            if (array[row][col - 1] == true && (previousPosition[0] != row || previousPosition[1] != col - 1)){
+                location[0] = row;
+                location[1] = col - 1;
+                return location;
+            }
+            if (array[row + 1][col] == true && (previousPosition[0] != row + 1|| previousPosition[1] != col)){
+                location[0] = row + 1;
+                location[1] = col;
+                return location;
+            }
+        }
+        else {
+            if (array[row - 1][col] == true && (previousPosition[0] != row - 1|| previousPosition[1] != col)){
+                location[0] = row - 1;
+                location[1] = col;
+                return location;
+            }
+            if (array[row][col + 1] == true && (previousPosition[0] != row || previousPosition[1] != col + 1)){
+                location[0] = row;
+                location[1] = col + 1;
+                return location;
+            }
+            if (array[row + 1][col] == true && (previousPosition[0] != row + 1|| previousPosition[1] != col)){
+                location[0] = row + 1;
+                location[1] = col;
+                return location;
+            }/////////////
+            if (array[row][col - 1] == true && (previousPosition[0] != row || previousPosition[1] != col - 1)){
+                location[0] = row;
+                location[1] = col - 1;
+                return location;
+            }
+        }
 
     }
 
-    private int[] findTailRecursive(int[] currentPosition, int[] previousPosition){
+    public int[] findTailRecursive(){       //starts the recursion call//
+        resetCounters();
+        return findTailRecursive(headPosition, headPosition);
+    }
+
+    private int[] findTailRecursive(int[] currentPosition, int[] previousPosition){     //update recursive checks in this method//
+        int length;
+        int[] tail = new int[3];
         int[] curr = new int[2];
+        if ((neighbors(game, currentPosition[0], currentPosition[1]) == 1) && (currentPosition[0] != headPosition[0] || currentPosition[1] != headPosition[1])) {
+            recursiveChecks += 1;
+            tail[0] = currentPosition[0];
+            tail[1] = currentPosition[1];
+        }
+        if ((neighbors(game, currentPosition[0], currentPosition[1]) == 1) && ((currentPosition[0] == headPosition[0]) || (currentPosition[1] == headPosition[1]))){
+            findTailRecursive()
+        }
+        if (neighbors(game, currentPosition[0], currentPosition[1]) > 1){
+            recursiveChecks += 1;
+            length += 1;
+        }
+
         if (currentPosition[0] == 0 && currentPosition[1] == 0){
-            if((game[0][1] == true) && ((previousPosition[0] != 0) || (previousPosition[1] != 1)) {
+            if((game[0][1] == true) && ((previousPosition[0] != 0) || (previousPosition[1] != 1)){
+                length += 1;
                 recursiveChecks += 1;
                 curr[0] = 0;
                 curr[1] = 1;
