@@ -9,9 +9,11 @@ public class SnakeGame {
         boolean[][] game = new boolean[1][1];   //creates default game with board size of 1 by 1//
     }
 
-    public SnakeGame(boolean[][] array, int x, int y){
-        boolean[][] game = new boolean[array.length][array[0].length];      //creates board with given size//
-        int[] headPosition = new int[2];        //creates array for head position//
+    public SnakeGame(boolean[][] array, int x, int y){//creates array for head position//
+        boolean[][] game = new boolean[array.length][array[0].length];
+        int[] headPosition = new int[2];
+        this.headPosition = headPosition;
+        this.game = game;
         for (int i = 0; i < array.length; i++){
             for (int j = 0; j < array[i].length; j++){
                 game[i][j] = array[i][j];       //copies array into game//
@@ -146,14 +148,17 @@ public class SnakeGame {
     }
 
     public int[] neighborsRecursive(boolean[][] array, int[] previousPosition, int row, int col){
+        int length = 0;
         int[] location = new int[2];
         if (row == 0 && col == 0){
             if (array[row][col + 1] == true && (previousPosition[0] != row || previousPosition[1] != col + 1)){
+                length += 1;
                 location[0] = row;
                 location[1] = col + 1;
                 return location;
             }
             if (array[row + 1][col] == true && (previousPosition[0] != row + 1|| previousPosition[1] != col)){
+                length += 1;
                 location[0] = row + 1;
                 location[1] = col;
                 return location;
@@ -161,11 +166,13 @@ public class SnakeGame {
         }
         else if (row == 0 && col == array.length - 1){
             if (array[row][col - 1] == true && (previousPosition[0] != row || previousPosition[1] != col - 1)){
+                length += 1;
                 location[0] = row;
                 location[1] = col - 1;
                 return location;
             }
             if (array[row + 1][col] == true && (previousPosition[0] != row + 1|| previousPosition[1] != col)){
+                length += 1;
                 location[0] = row + 1;
                 location[1] = col;
                 return location;
@@ -173,16 +180,19 @@ public class SnakeGame {
         }
         else if (row == 0){
             if (array[row][col - 1] == true && (previousPosition[0] != row || previousPosition[1] != col - 1)) {
+                length += 1;
                 location[0] = row;
                 location[1] = col - 1;
                 return location;
             }
             if (array[row + 1][col] == true && (previousPosition[0] != row + 1|| previousPosition[1] != col)){
+                length += 1;
                 location[0] = row + 1;
                 location[1] = col;
                 return location;
             }
             if (array[row][col + 1] == true && (previousPosition[0] != row || previousPosition[1] != col + 1)){
+                length += 1;
                 location[0] = row;
                 location[1] = col + 1;
                 return location;
@@ -190,11 +200,13 @@ public class SnakeGame {
         }
         else if (row == array.length - 1 && col == 0){
             if (array[row - 1][col] == true && (previousPosition[0] != row - 1|| previousPosition[1] != col)){
+                length += 1;
                 location[0] = row - 1;
                 location[1] = col;
                 return location;
             }
             if (array[row][col + 1] == true && (previousPosition[0] != row || previousPosition[1] != col + 1)){
+                length += 1;
                 location[0] = row;
                 location[1] = col + 1;
                 return location;
@@ -202,11 +214,13 @@ public class SnakeGame {
         }
         else if (row == array.length - 1 && col == array.length - 1){
             if (array[row - 1][col] == true && (previousPosition[0] != row - 1|| previousPosition[1] != col)){
+                length += 1;
                 location[0] = row - 1;
                 location[1] = col;
                 return location;
             }
             if (array[row][col - 1] == true && (previousPosition[0] != row || previousPosition[1] != col - 1)){
+                length += 1;
                 location[0] = row;
                 location[1] = col - 1;
                 return location;
@@ -214,16 +228,19 @@ public class SnakeGame {
         }
         else if (row == array.length - 1){
             if (array[row][col - 1] == true && (previousPosition[0] != row || previousPosition[1] != col - 1)){
+                length += 1;
                 location[0] = row;
                 location[1] = col - 1;
                 return location;
             }
             if (array[row - 1][col] == true && (previousPosition[0] != row - 1|| previousPosition[1] != col)){
+                length += 1;
                 location[0] = row - 1;
                 location[1] = col;
                 return location;
             }
             if (array[row][col + 1] == true && (previousPosition[0] != row || previousPosition[1] != col + 1)){
+                length += 1;
                 location[0] = row;
                 location[1] = col + 1;
                 return location;
@@ -231,16 +248,19 @@ public class SnakeGame {
         }
         else if (col == 0){
             if (array[row - 1][col] == true && (previousPosition[0] != row - 1|| previousPosition[1] != col)){
+                length += 1;
                 location[0] = row - 1;
                 location[1] = col;
                 return location;
             }
             if (array[row][col + 1] == true && (previousPosition[0] != row || previousPosition[1] != col + 1)){
+                length += 1;
                 location[0] = row;
                 location[1] = col + 1;
                 return location;
             }
             if (array[row + 1][col] == true && (previousPosition[0] != row + 1|| previousPosition[1] != col)){
+                length += 1;
                 location[0] = row + 1;
                 location[1] = col;
                 return location;
@@ -248,16 +268,19 @@ public class SnakeGame {
         }
         else if (col == array.length - 1){
             if (array[row - 1][col] == true && (previousPosition[0] != row - 1|| previousPosition[1] != col)){
+                length += 1;
                 location[0] = row - 1;
                 location[1] = col;
                 return location;
              }
             if (array[row][col - 1] == true && (previousPosition[0] != row || previousPosition[1] != col - 1)){
+                length += 1;
                 location[0] = row;
                 location[1] = col - 1;
                 return location;
             }
             if (array[row + 1][col] == true && (previousPosition[0] != row + 1|| previousPosition[1] != col)){
+                length += 1;
                 location[0] = row + 1;
                 location[1] = col;
                 return location;
@@ -265,27 +288,36 @@ public class SnakeGame {
         }
         else {
             if (array[row - 1][col] == true && (previousPosition[0] != row - 1|| previousPosition[1] != col)){
+                length += 1;
                 location[0] = row - 1;
                 location[1] = col;
                 return location;
             }
             if (array[row][col + 1] == true && (previousPosition[0] != row || previousPosition[1] != col + 1)){
+                length += 1;
                 location[0] = row;
                 location[1] = col + 1;
                 return location;
             }
             if (array[row + 1][col] == true && (previousPosition[0] != row + 1|| previousPosition[1] != col)){
+                length += 1;
                 location[0] = row + 1;
                 location[1] = col;
                 return location;
             }/////////////
             if (array[row][col - 1] == true && (previousPosition[0] != row || previousPosition[1] != col - 1)){
+                length += 1;
                 location[0] = row;
                 location[1] = col - 1;
                 return location;
             }
+            else {
+                location[0] = row;
+                location[1] = col;
+                return location;
+            }
         }
-
+        return location;
     }
 
     public int[] findTailRecursive(){       //starts the recursion call//
@@ -294,31 +326,35 @@ public class SnakeGame {
     }
 
     private int[] findTailRecursive(int[] currentPosition, int[] previousPosition){     //update recursive checks in this method//
-        int length;
+        int length = 0;
         int[] tail = new int[3];
-        int[] curr = new int[2];
-        if ((neighbors(game, currentPosition[0], currentPosition[1]) == 1) && (currentPosition[0] != headPosition[0] || currentPosition[1] != headPosition[1])) {
+        if (currentPosition[0] == headPosition[0] && currentPosition[1] == headPosition[1]) {
+            if (game[currentPosition[0]][currentPosition[1]] && currentPosition[0] != previousPosition[0] && currentPosition[1] != currentPosition[1]){
+                length += 1;
+            }
             recursiveChecks += 1;
             tail[0] = currentPosition[0];
             tail[1] = currentPosition[1];
+            tail[2] = length;
+            return findTailRecursive(neighborsRecursive(game, previousPosition, currentPosition[0], currentPosition[1]), currentPosition);
+
         }
-        if ((neighbors(game, currentPosition[0], currentPosition[1]) == 1) && ((currentPosition[0] == headPosition[0]) || (currentPosition[1] == headPosition[1]))){
-            findTailRecursive()
-        }
-        if (neighbors(game, currentPosition[0], currentPosition[1]) > 1){
-            recursiveChecks += 1;
+        if ((currentPosition[0] == previousPosition[0] && previousPosition[0] != headPosition[0]) && (currentPosition[1] == previousPosition[1] && previousPosition[1] != headPosition[1])){
             length += 1;
+            recursiveChecks += 1;
+            tail[0] = currentPosition[0];
+            tail[1] = currentPosition[1];
+            tail[2] = length;
+            return tail;
+        }
+        else {
+            if (game[currentPosition[0]][currentPosition[1]] && currentPosition[0] != previousPosition[0] && currentPosition[1] != previousPosition[1]){
+                length += 1;
+            }
+            recursiveChecks += 1;
+            return neighborsRecursive(game, previousPosition, currentPosition[0], currentPosition[1]);
         }
 
-        if (currentPosition[0] == 0 && currentPosition[1] == 0){
-            if((game[0][1] == true) && ((previousPosition[0] != 0) || (previousPosition[1] != 1)){
-                length += 1;
-                recursiveChecks += 1;
-                curr[0] = 0;
-                curr[1] = 1;
-                findTailRecursive(curr, currentPosition);
-            }
-        }
     }
 
     private void resetCounters(){
@@ -327,11 +363,11 @@ public class SnakeGame {
 
     }
 
-    private static int getRecursiveChecks(){
+    public static int getRecursiveChecks(){
         return recursiveChecks;
     }
 
-    private static int getExhaustiveChecks(){
+    public static int getExhaustiveChecks(){
         return exhaustiveChecks;
     }
 }
